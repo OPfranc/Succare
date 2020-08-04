@@ -8,5 +8,6 @@ const routes = Router()
 
 routes.post('/', PlantController.create)
 routes.get('/', PlantController.index)
+routes.delete('/:name',PlantController.delete)
 
 module.exports = routes

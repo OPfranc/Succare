@@ -14,8 +14,14 @@ module.exports = {
             info 
             } = req.body
 
-            const alias = JSON.stringify(objAlias)
+        const alias = JSON.stringify(objAlias)
+        
+        const plantInDatabase = await connection('plants').where('name', name).select('name').first()
 
+        if(!!plantInDatabase)
+            return res.status(400).json({ message: `${name} já existe` })
+
+            console.log("aaa");
         await connection('plants').insert({
             name, 
             alias,
@@ -27,15 +33,30 @@ module.exports = {
             info,
         })
 
-        return res.json({ message: `${name} criada` })
+        return res.status(201).json({ message: `${name} criada` })
 
     },
     async index(req, res) {
 
         const plants = await connection('plants').select('*')
-        plants.map((plant, index) => {
-            console.log(`planta ${(plant.alias)} at index ${index}`);
-        })
         return res.json(plants)
+    },
+
+    async delete(req, res) {
+
+        const { name } = req.params
+
+        const plantName = name.replace('%', ' ')
+
+
+        const plantToDelete = await connection('plants').where('name', plantName).select('name').first()
+        
+        if(!plantToDelete)
+            return res.status(404).json({error: 'plant not found'})
+        
+        await connection('plants').where('name', plantName).delete()
+
+        return res.status(204).send()
+   
     }
 }
