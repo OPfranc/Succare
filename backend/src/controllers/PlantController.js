@@ -21,7 +21,6 @@ module.exports = {
         if(!!plantInDatabase)
             return res.status(400).json({ message: `${name} já existe` })
 
-            console.log("aaa");
         await connection('plants').insert({
             name, 
             alias,

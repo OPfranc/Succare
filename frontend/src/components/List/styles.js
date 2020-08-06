@@ -32,7 +32,7 @@ export const Container = styled.div`
         align-items: center;
         background-color: #EBE9ED;
         margin: 3px 15px;
-        padding: 15px;
+        padding: 2px;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
