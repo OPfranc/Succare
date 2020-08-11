@@ -7,7 +7,7 @@ export default function Card({ plant }) {
     const { name, alias: sourceAlias, imgsrc, light, propagation, activity, water, info } = plant;
 
     console.log(sourceAlias);
-    const {en, ptbr} = sourceAlias;
+    const { en, ptbr } = sourceAlias;
     console.log(en);
 
     return (
@@ -15,14 +15,22 @@ export default function Card({ plant }) {
             <Container>
 
                 <h1>{name}</h1>
+                <h2>test</h2>
                 {/* <h2>{alias}</h2> */}
                 <img src={imgsrc} />
-                <p>{light}</p>
-                <p>{propagation}</p>
-
-                <p>{activity}</p>
-                <p>{water}</p>
-                <p>{info}</p>
+                <div>
+                    <strong>Light:</strong><p>{light}</p>
+                </div>
+                <div>
+                    <strong>Propagation:</strong><p>{propagation}</p>
+                </div>
+                <div>
+                    <strong>activity:</strong><p>{activity}</p>
+                </div>
+                <div>
+                    <strong>water:</strong><p>{water}</p>
+                </div>
+                {/* <p>{info}</p> */}
 
             </Container>
         </>

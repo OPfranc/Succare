@@ -14,11 +14,9 @@ export default function List({ plantList }) {
             <Container>
 
                 {plantList.map((plant, index) => (
-                    <ul key={index}>
-                        <li >
-                            <Card plant={plant} />
-                        </li>
-                    </ul>
+
+                    <Card plant={plant} key={index} />
+
                 ))}
 
             </Container>
