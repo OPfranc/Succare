@@ -1,46 +1,86 @@
 import React from 'react'
 
-import { Container, Info, CardHeader, HiddenInfo, Description } from './styles'
+import { Container, Info, CardHeader, HiddenInfo, Description, Watering } from './styles'
 
 export default function NewCard() {
+
+    let today = new Date()
+    console.log(today.toDateString())
+    const [day, month, dayNumber, year] = today.toDateString().split(" ")
+    console.log(month)
+
+
+    const plant = {
+
+        name: 'Orostachys boehmeri',
+        alias: 'Rosinha-de-pedra',
+        light: 'Full sun to partial shade',
+        propagation: 'by offsets',
+        activity: 'winter dormant',
+        lastWatering: `${month}/${dayNumber}`
+    }
+
+    var date2 = new Date(2020, 7, 13);
+
+    function daysCount(date2) {
+
+        const ONE_DAY = 1000 * 60 * 60 * 24;
+        const differenceMs = Math.abs((new Date()) - date2);
+    
+        return Math.round(differenceMs / ONE_DAY);
+    
+    }
+
+    const daysSinceWatering = daysCount(date2)
+    
+
+    const plants = [plant, plant, plant, plant, plant, plant, plant];
 
 
     return (
 
         <>
-            <Container>
+            {plants.map((p, index) => (
+                <Container key={index}>
 
-                <Info>
 
-                    <CardHeader>
+                    <Info>
 
-                        <h1>Orostachys boehmeri</h1>
-                        <h2>Rosinha-de-pedra</h2>
-                    </CardHeader>
-                    <HiddenInfo>
+                        <CardHeader>
 
-                        <strong>Light:</strong>
-                        <span>a</span>
+                            <h1>{p.name}</h1>
+                            <h2>{p.alias}</h2>
+                        </CardHeader>
+                        <HiddenInfo>
 
-                        <div/>
-                        <strong>Propagation:</strong>
-                        <span>b</span>
+                            <button>aaaaa</button>
 
-                        <div/>
-                        <strong>activity:</strong>
-                        <span>c</span>
+                            <div>
+                                <strong>Light:</strong>
+                                <span>{p.light}</span>
+                            </div>
 
-                    </HiddenInfo>
-                </Info>
+                            <div>
+                                <strong>Propagation:</strong>
+                                <span>{p.propagation}</span>
+                            </div>
 
-                <Description>
+                            <div>
+                                <strong>Activity:</strong>
+                                <span>{p.activity}</span>
+                            </div>
+                            <p>Last watering: {p.lastWatering}</p>
+                        </HiddenInfo>
+                    </Info>
 
-                    <img src={'http://www.jardineiro.net/wp-content/uploads/2017/11/Orostachys_boehmeri.jpg'} />
-                    <span>regada utima vez</span>
-                    <h1>123</h1>
-                    <p>A rosinha-de-pedra, da espécie Orostachys boehmeri, é uma planta suculenta estolonífera, originária do Japão, que se caracteriza por suas delicadas rosetas de folhas arredondadasA rosinha-de-pedra, da espécie Orostachys boehmeri, é uma planta suculenta estolonífera, originária do Japão, que se caracteriza por suas delicadas rosetas de folhas arredondadasA rosinha-de-pedra, da espécie Orostachys boehmeri, é uma planta suculenta estolonífera, originária do Japão, que se caracteriza por suas delicadas rosetas de folhas arredondadasA rosinha-de-pedra, da espécie Orostachys boehmeri, é uma planta suculenta estolonífera, originária do Japão, que se caracteriza por suas delicadas rosetas de folhas arredondadasA rosinha-de-pedra, da espécie Orostachys boehmeri, é uma planta suculenta estolonífera, originária do Japão, que se caracteriza por suas delicadas rosetas de folhas arredondadas</p>
-                </Description>
-            </Container>
+                    <Description>
+
+                        <img src={'http://www.jardineiro.net/wp-content/uploads/2017/11/Orostachys_boehmeri.jpg'} />
+                        
+                        <Watering color={daysSinceWatering > 5 ? 'red' : 'blue'}/>
+                    </Description>
+                </Container>
+            ))}
         </>
     )
 

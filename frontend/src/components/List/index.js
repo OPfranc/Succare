@@ -5,19 +5,19 @@ import { Container } from './styles'
 
 
 
-export default function List({ plantList }) {
+export default function List(props) {
 
 
     return (
 
         <>
             <Container>
-
-                {plantList.map((plant, index) => (
+            {props.children}
+                {/* {plantList.map((plant, index) => (
 
                     <Card plant={plant} key={index} />
 
-                ))}
+                ))} */}
 
             </Container>
         </>

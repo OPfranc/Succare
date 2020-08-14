@@ -43,8 +43,10 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <Header switchTheme={switchTheme}/>
-        <NewCard/>
-        <List plantList={plants} />
+         <List plantList={()=>{}}>
+         <NewCard/>
+         </List>
+        {/* <List plantList={plants} /> */}
       app
       <GlobalStyles />
       </ThemeProvider>

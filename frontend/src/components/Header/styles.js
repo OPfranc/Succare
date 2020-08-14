@@ -5,7 +5,7 @@ export const Container = styled.div`
     
     width: 100%;
     padding: 20px 55px;
-    height: 45px;
+    height: 55px;
     display: flex;
     align-items: center;
     background-color: ${props => props.theme.colors.background };

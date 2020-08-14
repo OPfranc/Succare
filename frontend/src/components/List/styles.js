@@ -6,21 +6,13 @@ export const Container = styled.div`
     width: 100%;
     height: 650px;
     padding: 5px;
-    border-radius: 8px;
-    background-color: #F5F4F6;
+    background-color: ${props => props.theme.colors.background};
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
 
-    box-shadow: 0 2px 1px rgba(0,0,0,0.09), 
-              0 4px 2px rgba(0,0,0,0.09), 
-              0 8px 4px rgba(0,0,0,0.09), 
-              0 16px 8px rgba(0,0,0,0.09),
-              0 32px 16px rgba(0,0,0,0.09);
     box-sizing: border-box;
     overflow: auto;
-    
-    border: 1px solid #ffffff;
 
 
     ul{
