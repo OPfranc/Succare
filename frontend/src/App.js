@@ -9,6 +9,7 @@ import api from './services/api'
 import usePersistedState from './utils/usePersistedState'
 
 import Header from './components/Header'
+import NewCard from './components/NewCard'
 import List from './components/List'
 
 
@@ -24,6 +25,7 @@ function App() {
 
     setTheme(theme.title === 'dark' ? light : dark)
   }
+
 
   useEffect(() => {
 
@@ -41,6 +43,7 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <Header switchTheme={switchTheme}/>
+        <NewCard/>
         <List plantList={plants} />
       app
       <GlobalStyles />

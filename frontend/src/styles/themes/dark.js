@@ -4,7 +4,7 @@ export default {
 
     colors: {
 
-        primary: '#f0f0f',
+        primary: '#42273B',
         secondary: '#70566D',
         background: '#000',
         text: '#fee',

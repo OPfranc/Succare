@@ -12,4 +12,5 @@ export const Container = styled.div`
     color: ${props => props.theme.colors.primary };
     justify-content: space-between;
     
+    border-bottom: 1px solid grey;
 `

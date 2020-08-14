@@ -9,7 +9,7 @@ export default function ThemeSwitcher({ switchTheme }) {
 
     return (
         <>
-            <Button onClick={switchTheme} onClick/>
+            <Button onClick={switchTheme}/>
         </>
     )
 }
