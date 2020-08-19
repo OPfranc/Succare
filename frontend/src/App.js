@@ -8,11 +8,9 @@ import dark from './styles/themes/dark'
 import api from './services/api'
 import usePersistedState from './utils/usePersistedState'
 
+import PlantForm from './components/PlantForm'
 import Header from './components/Header'
-import NewCard from './components/NewCard'
 import List from './components/List'
-
-
 
 
 function App() {
@@ -43,9 +41,8 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <Header switchTheme={switchTheme}/>
-         <List plantList={()=>{}}>
-         <NewCard/>
-         </List>
+        <PlantForm/>
+         <List plantList={()=>{}}/>
         {/* <List plantList={plants} /> */}
       app
       <GlobalStyles />
