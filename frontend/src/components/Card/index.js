@@ -10,6 +10,7 @@ import { Container,
 
 export default function NewCard({ plant }) {
 
+
     const [day, month, dayNumber, year] = plant.lastWatering.toDateString().split(" ")
     const [dateData, setDateData] = useState({
         day,
@@ -17,6 +18,30 @@ export default function NewCard({ plant }) {
         dayNumber,
         year
     })
+
+    let lightNeedsSunIndex = 0
+    let lightNeedsShadowIndex = 0
+
+    const lightNeedsSun = [
+        'no sun',
+        'partial sun',
+        'full sun'
+    ]
+    const lightNeedsShadow = [
+        'no shadow',
+        'partial shadow',
+        'shadow'
+    ]
+
+
+    function sunNeedsButtonHandler(){
+        lightNeedsSunIndex = ((1 + lightNeedsSunIndex) % lightNeedsSun.length)
+        console.log(lightNeedsSunIndex, 'SUN');
+    }
+    function shadowNeedsButtonHandler(){
+        lightNeedsShadowIndex = ((1 + lightNeedsShadowIndex) % lightNeedsShadow.length)
+        console.log(lightNeedsShadowIndex, 'SHADOW');
+    }
 
     let today = new Date()
 
@@ -33,6 +58,8 @@ export default function NewCard({ plant }) {
         return Math.round(differenceMs / (1000 * 60 * 60 * 24));
 
     }
+
+
 
     const daysSinceWatering = daysCount(plant.lastWatering)
     let waterNeedColor = '#44ff00'
@@ -60,6 +87,8 @@ export default function NewCard({ plant }) {
 
                         <Buttom onClick={wateringHandler}/>
 
+                        <Buttom onClick={sunNeedsButtonHandler}/>
+                        <Buttom onClick={shadowNeedsButtonHandler}/>
                         <div>
                             <strong>Light:</strong>
                             <span>{plant.light}</span>

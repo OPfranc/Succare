@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import { Water } from '@styled-icons/entypo'
 import { Water as WaterButtom } from '@styled-icons/ionicons-solid'
 
-
 export const Container = styled.div`
 
     width: 285px;
@@ -35,7 +34,6 @@ export const Info = styled.div`
     position: absolute;
     width: 100%;
     height: 70px;
-    /* background: linear-gradient(#dE685E, #EE786E); */
     background-color: ${props => props.theme.colors.primary};
     color: ${props => props.theme.colors.text};
     transition: height 0.2s ease-out;
@@ -168,7 +166,7 @@ export const Buttom = styled(WaterButtom)`
 
     &:active {
 	position:relative;
-	top:-1px;
+	bottom:1px;
 }
 
 `

@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { } from 'react';
 import { ThemeProvider } from 'styled-components'
 
 import GlobalStyles from './styles/GlobalStyles'
 import light from './styles/themes/light'
 import dark from './styles/themes/dark'
 
-import api from './services/api'
+// import api from './services/api'
 import usePersistedState from './utils/usePersistedState'
 
 import PlantForm from './components/PlantForm'
@@ -15,7 +15,7 @@ import List from './components/List'
 
 function App() {
 
-  const [plants, setPlants] = useState([])
+  // const [plants, setPlants] = useState([])
 
   const [theme, setTheme] = usePersistedState('theme', dark)
 
@@ -25,16 +25,16 @@ function App() {
   }
 
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    (async () => {
-      const response = await api.get(`/`)
-      const { data } = response
+  //   (async () => {
+  //     const response = await api.get(`/`)
+  //     const { data } = response
 
-      setPlants(data)
-    })()
+  //     setPlants(data)
+  //   })()
 
-  }, [])
+  // }, [])
 
 
   return (
@@ -43,8 +43,6 @@ function App() {
         <Header switchTheme={switchTheme}/>
         <PlantForm/>
          <List plantList={()=>{}}/>
-        {/* <List plantList={plants} /> */}
-      app
       <GlobalStyles />
       </ThemeProvider>
     </>
