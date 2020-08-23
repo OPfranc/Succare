@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
 import ConfirmBox from '../ConfirmBox'
@@ -36,9 +36,20 @@ export default function PlantForm() {
     const [activity, setActivity] = useState([0, 0, 1, 2])
     const [shadowNeed, setShadowNeed] = useState(2)
 
+    const [sendConfirmation, setSendConfirmation] = useState(false)
+
     const [showConfirmBox, setShowConfirmBox] = useState(false)
 
     const { register, handleSubmit, errors } = useForm()
+
+    useEffect(() => {
+
+        console.log('SENDING');
+
+        setShowConfirmBox(false)
+        setSendConfirmation(false)
+
+    }, [sendConfirmation])
 
     const lightNeedsSun = [
         'no sun',
@@ -84,7 +95,10 @@ export default function PlantForm() {
     }
 
     function onSubmit(data) {
-        console.log(data);
+
+    
+        setShowConfirmBox(true)
+        console.log(data, 'data');
     }
 
     return (
@@ -230,7 +244,7 @@ export default function PlantForm() {
 
             </Container>
 
-            {showConfirmBox && <ConfirmBox/>}
+            {showConfirmBox && <ConfirmBox title={'Insert Plant'} sendConfirmation={setSendConfirmation} showConfirmBox={setShowConfirmBox}/>}
         </Wrapper>
     )
 

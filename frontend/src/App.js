@@ -41,7 +41,7 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <Header switchTheme={switchTheme}/>
-        <PlantForm/>
+        {/* <PlantForm/> */}
          <List plantList={()=>{}}/>
       <GlobalStyles />
       </ThemeProvider>

@@ -1,25 +1,19 @@
 import React from 'react'
 
-import { Wrapper, ButtonsContainer, Container, Button, Reject } from './styles'
+import { Wrapper, ButtonsContainer, Container, Button } from './styles'
 
-export default function ConfirmBox({ switchTheme }) {
+export default function ConfirmBox({ title, sendConfirmation, showConfirmBox }) {
 
     return (
-        <Wrapper>
+        <Wrapper onClick={() => showConfirmBox(false)}>
             <Container>
 
-                <h1>Title</h1>
-                <span>aasdas
-                    asdasd
-                    asd
-                    asda
-                    sda
-                </span>
-                
+                <h1>{title}</h1>
+
                 <ButtonsContainer>
 
-                    <Button>aa</Button>
-                    <Button className={'reject-button'}>bb</Button>
+                    <Button onClick={() => sendConfirmation(true)}>OK</Button>
+                    <Button onClick={() => showConfirmBox(false)} className={'reject-button'}>CANCEL</Button>
                 </ButtonsContainer>
             </Container>
         </Wrapper>

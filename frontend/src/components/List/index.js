@@ -33,23 +33,26 @@ export default function List(props) {
             sunNeed,
             waterNeed,
             activity,
-            propagation
+            propagation,
+            lastWatering: date2
         }
 
         console.log(newPlant, 'new')
+
+        return newPlant
     }
 
-    plantify(newPlant)
+    const plant = plantify(newPlant)
 
-    const plant = {
+    // const plant = {
 
-        name: 'Orostachys boehmeri',
-        alias: 'Rosinha-de-pedra',
-        light: 'Full sun to partial shade',
-        propagation: 'by offsets',
-        activity: 'winter dormant',
-        lastWatering: date2
-    }
+    //     name: 'Orostachys boehmeri',
+    //     alias: 'Rosinha-de-pedra',
+    //     light: 'Full sun to partial shade',
+    //     propagation: 'by offsets',
+    //     activity: 'winter dormant',
+    //     lastWatering: date2
+    // }
 
     const plants = [plant, plant, plant, plant, plant, plant, plant];
 

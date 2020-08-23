@@ -71,7 +71,7 @@ export const TextInputContainer = styled.div`
         font-size: 14px;
         line-height: 25px;
         color: #b2c2df;
-        background: #eef4ff;
+        background-color: #eef4ff;
         border: 1px solid #cdd9ed;
 
         transition: all .3s ease;
@@ -88,7 +88,7 @@ export const TextInputContainer = styled.div`
     &:focus-within {
         span {
             color: #ffffff;
-            background: #a4a6c7;
+            background-color: #a4a6c7;
             border-color: #6a70c9;
         }
     }

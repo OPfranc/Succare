@@ -1,12 +1,19 @@
 import React, { useState } from 'react'
 
-import { Container,
-     Info,
-     CardHeader,
-     HiddenInfo,
-     Description,
-     Watering,
-     Buttom } from './styles'
+import {
+    Container,
+    Info,
+    CardHeader,
+    HiddenInfo,
+    Description,
+    Watering,
+    Buttom,
+    InfoContainer,
+    Tooltip,
+    Selector
+} from './styles'
+
+import { ShadowIcon, SunIcon } from '../../styles/icons'
 
 export default function NewCard({ plant }) {
 
@@ -34,22 +41,13 @@ export default function NewCard({ plant }) {
     ]
 
 
-    function sunNeedsButtonHandler(){
-        lightNeedsSunIndex = ((1 + lightNeedsSunIndex) % lightNeedsSun.length)
-        console.log(lightNeedsSunIndex, 'SUN');
-    }
-    function shadowNeedsButtonHandler(){
-        lightNeedsShadowIndex = ((1 + lightNeedsShadowIndex) % lightNeedsShadow.length)
-        console.log(lightNeedsShadowIndex, 'SHADOW');
-    }
-
     let today = new Date()
 
 
     function wateringHandler() {
         plant.lastWatering = today;
         const [day, month, dayNumber, year] = plant.lastWatering.toDateString().split(" ")
-        setDateData({day, month, dayNumber, year})
+        setDateData({ day, month, dayNumber, year })
     }
 
     function daysCount(date2) {
@@ -64,12 +62,12 @@ export default function NewCard({ plant }) {
     const daysSinceWatering = daysCount(plant.lastWatering)
     let waterNeedColor = '#44ff00'
 
-    if(daysSinceWatering > 3)
+    if (daysSinceWatering > 3)
         waterNeedColor = '#fff600'
-    if(daysSinceWatering > 7)
+    if (daysSinceWatering > 7)
         waterNeedColor = '#ff9300'
-    if(daysSinceWatering > 14)
-    waterNeedColor = '#ff0000'
+    if (daysSinceWatering > 14)
+        waterNeedColor = '#ff0000'
 
 
     return (
@@ -80,18 +78,35 @@ export default function NewCard({ plant }) {
 
                     <CardHeader>
 
-                        <h1>{plant.name}</h1>
-                        <h2>{plant.alias}</h2>
-                        </CardHeader>
+                        <h1>{plant.plantName}</h1>
+                        <h2>{plant.plantAlias}</h2>
+                    </CardHeader>
                     <HiddenInfo>
 
-                        <Buttom onClick={wateringHandler}/>
+                        <Buttom onClick={wateringHandler} />
 
-                        <Buttom onClick={sunNeedsButtonHandler}/>
-                        <Buttom onClick={shadowNeedsButtonHandler}/>
+                        <InfoContainer>
+                            <span>Light</span>
+                            <div>
+                                <Selector>
+
+                                    <ShadowIcon className={`color-variant${plant.shadowNeed}`} />
+                                    <Tooltip>{lightNeedsShadow[plant.shadowNeed]}</Tooltip>
+                                </Selector>
+                                <Selector>
+
+                                    <SunIcon className={`color-variant${plant.sunNeed}`} />
+                                    <Tooltip>{lightNeedsShadow[plant.sunNeed]}</Tooltip>
+                                </Selector>
+                            </div>
+                        </InfoContainer>
+
                         <div>
-                            <strong>Light:</strong>
-                            <span>{plant.light}</span>
+                            <h4>Light:</h4>
+                            <ShadowIcon className={`color-variant${plant.shadowNeed}`} />
+                            <p>{lightNeedsShadow[plant.shadowNeed]}</p>
+                            <SunIcon className={`color-variant${plant.sunNeed}`} />
+                            <p>{lightNeedsShadow[plant.sunNeed]}</p>
                         </div>
 
                         <div>
