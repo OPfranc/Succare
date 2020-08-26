@@ -6,7 +6,7 @@ export const Container = styled.div`
     
     position: relative;
     width: 100%;
-    height: 650px;
+    height: 100%;
     padding: 5px;
     background-color: ${props => props.theme.colors.background};
     display: flex;

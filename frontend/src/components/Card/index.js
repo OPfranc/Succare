@@ -9,11 +9,13 @@ import {
     Watering,
     Buttom,
     InfoContainer,
-    Tooltip,
     Selector
 } from './styles'
 
 import { ShadowIcon, SunIcon } from '../../styles/icons'
+
+import { propEnum } from '../../utils/Enums'
+
 
 export default function NewCard({ plant }) {
 
@@ -25,9 +27,6 @@ export default function NewCard({ plant }) {
         dayNumber,
         year
     })
-
-    let lightNeedsSunIndex = 0
-    let lightNeedsShadowIndex = 0
 
     const lightNeedsSun = [
         'no sun',
@@ -60,6 +59,8 @@ export default function NewCard({ plant }) {
 
 
     const daysSinceWatering = daysCount(plant.lastWatering)
+
+    
     let waterNeedColor = '#44ff00'
 
     if (daysSinceWatering > 3)
@@ -83,9 +84,7 @@ export default function NewCard({ plant }) {
                     </CardHeader>
                     <HiddenInfo>
 
-                        <Buttom onClick={wateringHandler} />
-
-                        <InfoContainer>
+                        {/* <InfoContainer>
                             <span>Light</span>
                             <div>
                                 <Selector>
@@ -96,29 +95,37 @@ export default function NewCard({ plant }) {
                                 <Selector>
 
                                     <SunIcon className={`color-variant${plant.sunNeed}`} />
-                                    <Tooltip>{lightNeedsShadow[plant.sunNeed]}</Tooltip>
+                                    <Tooltip>{lightNeedsSun[plant.sunNeed]}</Tooltip>
                                 </Selector>
+                            </div>
+                        </InfoContainer> */}
+{/* 
+                        <InfoContainer>
+                            <span>Propagation by</span>
+                            <div>
+                                {plant.propagation.map((propagationMethod, index) => (
+                                    propagationMethod && <h4 key={index}>{propEnum[index]}</h4>
+                                ))}
+                            </div>
+                        </InfoContainer> */}
+
+                        <InfoContainer>
+                            <span>Activity</span>
+                            <div>
+                                {plant.activity.map((seasonActivity, index) => (
+                                    !!seasonActivity && <Selector key={index} ></Selector>
+                                ))}
                             </div>
                         </InfoContainer>
 
-                        <div>
-                            <h4>Light:</h4>
-                            <ShadowIcon className={`color-variant${plant.shadowNeed}`} />
-                            <p>{lightNeedsShadow[plant.shadowNeed]}</p>
-                            <SunIcon className={`color-variant${plant.sunNeed}`} />
-                            <p>{lightNeedsShadow[plant.sunNeed]}</p>
-                        </div>
 
-                        <div>
-                            <strong>Propagation:</strong>
-                            <span>{plant.propagation}</span>
-                        </div>
 
                         <div>
                             <strong>Activity:</strong>
                             <span>{plant.activity}</span>
                         </div>
                         <p>Last watering: {dateData.month}/{dateData.dayNumber}</p>
+                        <Buttom onClick={wateringHandler} />
                     </HiddenInfo>
                 </Info>
 

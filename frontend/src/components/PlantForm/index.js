@@ -107,7 +107,7 @@ export default function PlantForm() {
 
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <TextInputContainer>
-                        <span>Plant name</span>
+                        <   >Plant name</>
 
                         <input
                             type={'text'}

@@ -2,6 +2,7 @@ import React from 'react'
 
 
 import Card from '../Card'
+import PlantCard from '../PlantCard'
 import { Container } from './styles'
 
 
@@ -14,8 +15,8 @@ export default function List(props) {
 
         plantName: 'Orostachys boehmeri',
         plantAlias: 'Rosinha-de-pedra',
-        activity: "0,0,1,2",
-        propagation: "false,false,false,true",
+        activity: "2,1,1,2",
+        propagation: "true,true,true,true",
         shadowNeed: 2,
         sunNeed: 2,
         waterNeed: 0,  
@@ -61,7 +62,10 @@ export default function List(props) {
         <>
             <Container>
                 {plants.map((plant, index) => (
-                    <Card plant={plant} key={index}/>
+                    <div key={index}>
+                    <PlantCard plant={plant} key={index}/>
+                    <Card plant={plant} />
+                    </div>
                 ))}
 
             </Container>

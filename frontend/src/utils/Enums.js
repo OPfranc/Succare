@@ -4,6 +4,12 @@ export const seasonsEnum = [
     'winter',
     'spring'
 ]
+export const propEnum = [
+    'seeds',
+'cuts',
+'leafs',
+'offsets'
+]
 export const propagationEnum = {
     'seeds': 0,
     'cuts': 1,
@@ -20,4 +26,16 @@ export const waterNeedsEnum = [
     'low needs',
     'normal',
     'high demand',
+]
+
+export const lightNeedsSunEnum = [
+    'no sun',
+    'partial sun',
+    'full sun'
+]
+
+export const lightNeedsShadowEnum = [
+    'no shadow',
+    'partial shadow',
+    'shadow'
 ]

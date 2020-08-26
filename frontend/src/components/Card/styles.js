@@ -39,6 +39,9 @@ export const InfoContainer = styled.div`
     display: flex;
     width: 100%;
 
+    align-content: center;
+
+
     span {
         min-width: 100px;
         border-radius: 8px 0 0 8px;
@@ -52,6 +55,7 @@ export const InfoContainer = styled.div`
         border: 1px solid #cdd9ed;
 
         transition: all .3s ease;
+
     }
     div{
         display: flex;
@@ -69,6 +73,9 @@ export const InfoContainer = styled.div`
 
         border-radius: 0 8px 8px 0;
         transition: all .3s ease;
+
+        align-content: center;
+
     }
 `
 export const Selector = styled.div`
@@ -170,10 +177,6 @@ export const Info = styled.div`
     ${Container}:hover & {
         height: 100%;
     }
-
-
-
-
 `
 export const CardHeader = styled.div`
 
@@ -258,12 +261,12 @@ export const Description = styled.div`
 `
 
 export const Watering = styled(Water)`
+
+    position: absolute;
     bottom: 36px;
     right: 36px;
-    /* color: red; */
     width: 42px;
     height: 42px;
-    position: absolute;
     border-radius: 50%;
     background-color: #fff2;
     padding: 6px;
@@ -297,4 +300,3 @@ export const Buttom = styled(WaterButtom)`
 }
 
 `
-

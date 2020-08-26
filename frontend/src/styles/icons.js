@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 
+import { Water as WaterDrops} from '@styled-icons/entypo'
+
 import { Water } from '@styled-icons/ionicons-solid'
 
 import { Sun } from '@styled-icons/evaicons-solid'
@@ -48,6 +50,7 @@ export const ShadowIcon = styled(Shadow)`
     }
 `
 export const WaterDrop = styled(Water)`
+    
 
     /* color: ${props => props.sel? '#f0f' : '#0f0'}; */
     width: 30px;
@@ -57,6 +60,13 @@ export const WaterDrop = styled(Water)`
     &.fill{
         color: #8acdda;
     }
+`
+export const WaterWarningIcon = styled(WaterDrops)`
+position: absolute;
+/* color: ${props => props.sel? '#f0f' : '#0f0'}; */
+width: 30px;
+height: 30px;
+color: white;
 
 `
 
