@@ -8,11 +8,6 @@ export default createGlobalStyle`
         box-sizing: border-box;
         font-family: 'Roboto', sans-serif;
         -webkit-font-smoothing: antialiased;
+
     }
-
-    body{
-
-        background-color: ${props => props.theme.colors.background };
-    }
-
 `

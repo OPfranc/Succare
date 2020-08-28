@@ -9,7 +9,7 @@ export const Button = styled.div`
     height: 55px;
     border-radius: 50%;
 
-    color: white;
+    color: ${props => props.theme.colors.background };
 
     font-size: 35px;
 
@@ -19,7 +19,11 @@ export const Button = styled.div`
 
     align-items: center;
     justify-content: center;
-    background-color: green;
+    background-color: ${props => props.theme.colors.primary};
+
+    border: 1px solid ${props => props.theme.colors.background};
+
+    transition: all .3s ease;
 
     cursor: pointer;
 
@@ -27,11 +31,13 @@ export const Button = styled.div`
 
     &:hover{
 
-        background-color: blue;
+        background-color: ${props => props.theme.colors.secondary};
     }
 
     &:active{
-        background-color: white;
+        background-color: ${props => props.theme.colors.background};
+        color: ${props => props.theme.colors.secondary};
+        border-color: ${props => props.theme.colors.secondary};
 
     }
 

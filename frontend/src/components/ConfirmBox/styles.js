@@ -13,7 +13,7 @@ export const Wrapper = styled.div`
 
     top: -1px;
 
-    background-color: #0001;
+    background-color: ${props => props.theme.colors.secondary }10;
     backdrop-filter: blur(3px);
 
     z-index: 50;
@@ -33,8 +33,8 @@ export const Container = styled.div`
     width: 300px;
     height: 150px;
 
-    background-color: #eef4ff;
-    border: 1px solid #cdd9ed;
+    background-color: ${props => props.theme.colors.cardBackground };
+    border: 1px solid ${props => props.theme.colors.primaryLightest };
 
     display: flex;
 
@@ -46,14 +46,14 @@ export const Container = styled.div`
     z-index: 60;
 
     h1{
-        color: #b2c2df;
+        color: ${props => props.theme.colors.textSecondary };
 
     }
 
     span{
-        color: #a4a6c7;
-        background-color: #ffffff;
-        border: 1px solid #cdd9ed;
+        color: ${props => props.theme.colors.secondaryBackground };
+        background-color: ${props => props.theme.colors.background };
+        border: 1px solid ${props => props.theme.colors.primaryLightest };
         border-left: 0;
         border-bottom: 0;
         border-right: 0;
@@ -76,9 +76,9 @@ export const Button = styled.div`
     width: 93px;
     height: 36px;
 
-        color: #ffffff;
-        background: #8acdda;
-        border-color: #59b8cb;
+        color: ${props => props.theme.colors.background };
+        background: ${props => props.theme.colors.primaryStrongher };
+        border-color: ${props => props.theme.colors.primary};
 
     border-radius: 8px;
 
@@ -87,23 +87,23 @@ export const Button = styled.div`
     padding: 21px;
 
     &:hover{
-        color: #ffffff;
-            background: #a4a6c7;
-            border-color: #6a70c9;
-            box-shadow: 0 5px 15px #6a70c940;
+        color: ${props => props.theme.colors.background };
+            background: ${props => props.theme.colors.secondaryBackground };
+            border-color: ${props => props.theme.colors.secondaryBorder };
+            box-shadow: 0 5px 15px ${props => props.theme.colors.secondaryBorder }40;
     }
 
     &.reject-button{
 
-        color: #b2c2df50;
-        background: #eef4ff;
-        border: 1px solid #cdd9ed;
+        color: ${props => props.theme.colors.textSecondary }50;
+        background: ${props => props.theme.colors.cardBackground };
+        border: 1px solid ${props => props.theme.colors.primaryLightest };
 
         &:hover{
-            color: #ffffff;
-            background: #a4a6c7;
-            border-color: #6a70c9;
-            box-shadow: 0 5px 15px #6a70c940;
+            color: ${props => props.theme.colors.secondaryBackground };
+            background: ${props => props.theme.colors.background };
+            border-color: ${props => props.theme.colors.secondaryBorder };
+            box-shadow: 0 5px 15px ${props => props.theme.colors.secondaryBorder}40;
         }
     }
 
@@ -121,8 +121,8 @@ export const ButtonsContainer = styled.div`
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    background-color: #ffffff;
-    border: 1px solid #cee2eb;
+    background-color: ${props => props.theme.colors.background };
+    border: 1px solid ${props => props.theme.colors.textSecondaryBorder };
     border-radius: 0 0 8px 8px;
 
 `

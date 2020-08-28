@@ -5,14 +5,13 @@ export const Container = styled.div`
     position: absolute;
     width: 350px;
     height: 550px;
-    background-color: #f7fcfc;
+    background-color: ${props => props.theme.colors.background};
 
     display: flex;
     flex-direction: column; 
     
 
     box-sizing: border-box;
-
 
     box-shadow: 0 1px 2px rgba(0,0,0,0.07), 
                 0 2px 4px rgba(0,0,0,0.07), 
@@ -37,21 +36,20 @@ export const InfoContainer = styled.div`
     
     height: 110px;
 
-    background-color: #f7fcfc;
-    color: #b2c2df;
+    background-color: ${props => props.theme.colors.cardBackground };
+    color: ${props => props.theme.colors.textSecondary };
     transition: height 0.2s ease-out;
     overflow: hidden;
     z-index: 2;
 
     padding: 13px;
 
-
     ${Container}:hover & {
         height: 100%;
     }
 
     h1{
-        font-size: 23px;
+        font-size: 22px;
         text-align: center;
         font-weight: 600;
         margin-top: 24px;
@@ -94,10 +92,9 @@ export const IconContainer = styled.div`
         justify-content: space-around;
         flex-flow: row wrap;
         
-        color: #a4a6c7;
-        background-color: #ffffff;
 
-        border: 1px solid #cee2eb;
+        background-color: ${props => props.theme.colors.background };
+        border: 1px solid ${props => props.theme.colors.textPrimaryBorder };
 
         border-radius: 0 8px 8px 0;
         transition: all .3s ease;
@@ -113,10 +110,10 @@ export const Label = styled.label`
         text-align: center;
         padding: 8px 12px;
         font-size: 14px;
-        color: #b2c2df;
-        background-color: #eef4ff;
+        color: ${props => props.theme.colors.textPrimary };
+        background-color: ${props => props.theme.colors.textPrimaryBackground };
 
-        border: 1px solid #cdd9ed;
+        border: 1px solid ${props => props.theme.colors.textPrimaryBorder };
         border-right: 0;
         
         &.watering{
@@ -131,13 +128,13 @@ export const Icon = styled.div`
 
     position: relative;
     display: flex;
-    background-color: red;
+    background-color: ${props => props.theme.colors.primary };
     align-items: center;
     justify-content: center;
 
     padding: 3px;
     height: 35px;
-    width: 75px;
+    width: 55px;
 
 
     border-radius: 8px;
@@ -148,12 +145,10 @@ export const Icon = styled.div`
     transition: all .3s ease;
 
 
-    color: #ffffff;
-        background: #8acdda;
-        border-color: #59b8cb;
-    &:hover{
+    color: ${props => props.theme.colors.background };
+    background-color: ${props => props.theme.colors.primaryStrongher };
 
-        
+    &:hover{
         span{
                 visibility: visible;
             }
@@ -172,14 +167,43 @@ export const WateringWarn = styled.div`
     border-radius: 50%;
     background-color: green;
 
+
     &.caution{
         background-color: yellow;
     }
     &.danger{
         background-color: red;
+        animation: vibrate-1 0.3s linear infinite both;
     }
     padding: 6px;
 
+
+    @keyframes vibrate-1 {
+  0% {
+    -webkit-transform: translate(0);
+            transform: translate(0);
+  }
+  20% {
+    -webkit-transform: translate(-2px, 2px);
+            transform: translate(-2px, 2px);
+  }
+  40% {
+    -webkit-transform: translate(-2px, -2px);
+            transform: translate(-2px, -2px);
+  }
+  60% {
+    -webkit-transform: translate(2px, 2px);
+            transform: translate(2px, 2px);
+  }
+  80% {
+    -webkit-transform: translate(2px, -2px);
+            transform: translate(2px, -2px);
+  }
+  100% {
+    -webkit-transform: translate(0);
+            transform: translate(0);
+  }
+}
  
 
 `
@@ -191,6 +215,7 @@ export const WateringWarnSpin = styled.div`
     border: 2px dashed green;
     left: -40%;
     top: -40%;
+    
 
     animation: spin 3s linear infinite alternate;
 
@@ -205,7 +230,7 @@ export const WateringWarnSpin = styled.div`
 
     &.danger{
         border: 2px dashed red;
-        animation: spin 1s ease-in-out infinite reverse both;
+        animation: spin 3s linear infinite;
     }
 
     @keyframes spin { 

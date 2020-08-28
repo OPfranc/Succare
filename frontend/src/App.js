@@ -1,11 +1,11 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect} from 'react';
 import { ThemeProvider } from 'styled-components'
 
 import GlobalStyles from './styles/GlobalStyles'
 import light from './styles/themes/light'
 import dark from './styles/themes/dark'
 
-// import api from './services/api'
+import api from './services/api'
 import usePersistedState from './utils/usePersistedState'
 
 import PlantForm from './components/PlantForm'
@@ -16,7 +16,9 @@ import List from './components/List'
 
 function App() {
 
-  // const [plants, setPlants] = useState([])
+  const [watcher, setWatcher] = useState('')
+
+  const [plants, setPlants] = useState([])
 
   const [showNewForm, setShowNewForm] = useState(false)
 
@@ -28,24 +30,24 @@ function App() {
   }
 
 
-  // useEffect(() => {
+  useEffect(() => {
 
-  //   (async () => {
-  //     const response = await api.get(`/`)
-  //     const { data } = response
+    (async () => {
+      const response = await api.get(`/`)
+      const { data } = response
 
-  //     setPlants(data)
-  //   })()
+      setPlants(data)
+    })()
 
-  // }, [])
+  }, [watcher])
 
 
   return (
     <>
       <ThemeProvider theme={theme}>
         <Header switchTheme={switchTheme}/>
-        { showNewForm && <PlantForm close={setShowNewForm}/> }
-         <List plantList={()=>{}}/>
+        { showNewForm && <PlantForm close={setShowNewForm} watcher={setWatcher}/> }
+         <List plants={plants}/>
          <NewButton onClick={() => {setShowNewForm(true)}}/>
       <GlobalStyles />
       </ThemeProvider>

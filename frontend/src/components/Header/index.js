@@ -12,7 +12,7 @@ export default function Header({ switchTheme }) {
 
                 <ThemeSwitcher switchTheme={switchTheme}/>
 
-                <h1>2</h1>
+                <h1>🍁🍁</h1>
 
             </Container>
         </>

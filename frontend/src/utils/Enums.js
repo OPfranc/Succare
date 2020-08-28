@@ -6,9 +6,9 @@ export const seasonsEnum = [
 ]
 export const propEnum = [
     'seeds',
-'cuts',
-'leafs',
-'offsets'
+    'cuts',
+    'leafs',
+    'offsets'
 ]
 export const propagationEnum = {
     'seeds': 0,

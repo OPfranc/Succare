@@ -2,19 +2,21 @@ const connection = require('../database/connection')
 const { connect } = require('../routes')
 
 module.exports = {
+
     async create(req, res) {
+
         const { 
             name, 
-            alias: objAlias,
+            alias,
             imgsrc,
-            light,
             propagation,
             activity,
-            water,
-            info 
+            lastWatering,
+            waterNeed,
+            sunNeed,
+            shadowNeed
             } = req.body
 
-        const alias = JSON.stringify(objAlias)
         
         const plantInDatabase = await connection('plants').where('name', name).select('name').first()
 
@@ -25,11 +27,12 @@ module.exports = {
             name, 
             alias,
             imgsrc,
-            light,
             propagation,
             activity,
-            water,
-            info,
+            lastWatering,
+            waterNeed,
+            sunNeed,
+            shadowNeed
         })
 
         return res.status(201).json({ message: `${name} criada` })

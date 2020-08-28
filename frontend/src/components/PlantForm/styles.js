@@ -13,6 +13,7 @@ export const Wrapper = styled.div`
     height: 100%;
     
     z-index: 20;
+    background-color: ${props => props.theme.colors.secondary }21;
     backdrop-filter: blur(3px);
 `
 export const Close = styled.div`
@@ -32,16 +33,27 @@ export const Close = styled.div`
     border-radius: 8px; 
 
 
-    color: #ffffff;
-    border: 1px solid #cdd9ed;
+    color: ${props => props.theme.colors.cardBackground };
+
+    border: 1px solid  ${props => props.theme.colors.background };
     
-    background-color: #59b8cb;
+    background-color: ${props => props.theme.colors.primary };
+
+
+    transition: all .1s ease;
 
     cursor: pointer;
 
     &:hover{
-    border: 1px solid #6a70c9;
-    background-color: #a4a6c7;
+
+ background-color: ${props => props.theme.colors.secondary };
+
+    }
+
+    &:active{
+        background-color:${props => props.theme.colors.background };
+        color: ${props => props.theme.colors.secondary };
+        border-color: ${props => props.theme.colors.secondary };
 
     }
 `
@@ -50,7 +62,9 @@ export const Container = styled.div`
 
     width: 350px;
     height: 700px;
-    background-color: #f7fcfc;
+    background-color: ${props => props.theme.colors.cardBackground }E6;
+    backdrop-filter: blur(3px);
+
 
     display: flex;
     flex-direction: column; 
@@ -72,24 +86,24 @@ export const Container = styled.div`
 
     margin: 18px auto;
     border-radius: 8px;
-    /* background-color: ${props => props.theme.colors.primary}; */
 
     h2{
         text-align: center;
         font-weight: 500;
-        color: #b2c2df;
+        color: ${props => props.theme.colors.textSecondary };
         font-size: 14px;
-        margin-top: 28px;
+        margin-top: 23px;
         padding-top: 8px;
         padding-bottom: 4px;
-        background-color: #eef4ff;
-        border: 1px solid #cdd9ed;
+        background-color: ${props => props.theme.colors.textSecondaryBackground };
+        border: 1px solid ${props => props.theme.colors.textPrimaryBorder };
         border-radius: 8px 8px 0 0;
     }
+
 `
 export const TextInputContainer = styled.div`
 
-    margin: 10px 0;
+    margin: 5px 0;
     position: relative;
     display: flex;
     width: 100%;
@@ -102,9 +116,9 @@ export const TextInputContainer = styled.div`
         padding: 8px 12px;
         font-size: 14px;
         line-height: 25px;
-        color: #b2c2df;
-        background-color: #eef4ff;
-        border: 1px solid #cdd9ed;
+        color: ${props => props.theme.colors.textSecondary };
+        background-color: ${props => props.theme.colors.textSecondaryBackground };
+        border: 1px solid ${props => props.theme.colors.textPrimaryBorder };
 
         transition: all .3s ease;
     }
@@ -119,9 +133,9 @@ export const TextInputContainer = styled.div`
 
     &:focus-within {
         span {
-            color: #ffffff;
-            background-color: #a4a6c7;
-            border-color: #6a70c9;
+            color: ${props => props.theme.colors.background };
+            background-color: ${props => props.theme.colors.secondaryBackground };
+            border-color: ${props => props.theme.colors.secondaryBorder };
         }
     }
 
@@ -133,9 +147,11 @@ export const TextInputContainer = styled.div`
         font-size: 14px;
         font-weight: 500;
         
-        color: #a4a6c7;
-        background-color: #ffffff;
-        border: 1px solid #cee2eb;
+        color: ${props => props.theme.colors.secondaryBackground };
+        background-color: ${props => props.theme.colors.background };
+        border: 1px solid;
+        border-color: ${props => props.theme.colors.textSecondaryBorder };
+
         border-left: 0;
 
         border-radius: 0 8px 8px 0;
@@ -143,11 +159,11 @@ export const TextInputContainer = styled.div`
 
         &::placeholder {
             
-            color: #cce0e3;
+            color: ${props => props.theme.colors.textSecondaryBorder };
         }
         &:focus {
-            background-color: #ffffff;
-            border-color: #6a70c9;
+            background-color: ${props => props.theme.colors.background };
+            border-color: ${props => props.theme.colors.secondaryBorder };
             outline: none;
         }
     }
@@ -163,9 +179,11 @@ export const SendButton = styled.button.attrs({
     width: 100%;
     height: 41px;
 
-    background-color: #ffffff;
-    border: 1px solid #a4a6c7;
-    color: #6a70c9;
+    background-color: ${props => props.theme.colors.primary };
+
+    border: 1px solid ${props => props.theme.colors.cardBackground };
+
+    color: ${props => props.theme.colors.cardBackground };
 
     font-size: 14px;
     font-weight: 600;
@@ -173,18 +191,22 @@ export const SendButton = styled.button.attrs({
     cursor: pointer;
 
     text-transform: uppercase;
-    transition: all .3s ease;
+    transition: all .2s ease;
     &:hover{
-            color: #ffffff;
-            background: #a4a6c7;
-            border-color: #6a70c9;
+
+        background-color: ${props => props.theme.colors.secondary };;
     }
 
     &:active {
+        background-color: ${props => props.theme.colors.cardBackground };
+        color: ${props => props.theme.colors.secondary };;
+        border-color: ${props => props.theme.colors.secondary };;
+
 	    position:relative;
 	    bottom:-1px;
         outline: none;
     }
+    outline: none;
 
 `
 export const WaterContainer = styled.div`
@@ -199,8 +221,8 @@ export const WaterContainer = styled.div`
 
     margin-bottom: 5px;
 
-    background-color: #ffffff;
-    border: 1px solid #cee2eb;
+    background-color: ${props => props.theme.colors.background };
+    border: 1px solid ${props => props.theme.colors.textSecondaryBorder };
     border-radius: 0 0 8px 8px;
     border-top: 0;
     span{
@@ -211,7 +233,7 @@ export const WaterContainer = styled.div`
 
     &:hover{
 
-        background-color: #eef4ff;
+        background-color: ${props => props.theme.colors.textSecondaryBackground };
 
         span{
             visibility: visible;
@@ -235,8 +257,8 @@ export const ButtomContainer = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    background-color: #ffffff;
-    border: 1px solid #cee2eb;
+    background-color: ${props => props.theme.colors.background };
+    border: 1px solid  ${props => props.theme.colors.textSecondaryBorder };
     border-radius: 0 0 8px 8px;
     border-top: 0;
 `
@@ -253,9 +275,9 @@ export const Selector = styled.div`
     height: 35px;
     width: 75px;
 
-    color: #b2c2df50;
-    background: #eef4ff;
-    border: 1px solid #cdd9ed;
+    color: ${props => props.theme.colors.secondaryBorder}50;
+    background: ${props => props.theme.colors.cardBackground };
+    border: 1px solid ${props => props.theme.colors.primaryLightest };
 
     margin: 0px 5px;
 
@@ -266,10 +288,10 @@ export const Selector = styled.div`
     cursor: pointer;
 
     &:hover{
-        color: #ffffff;
-        background: #a4a6c7;
-        border-color: #6a70c9;
-        box-shadow: 0 5px 15px #6a70c940;
+        color:  ${props => props.theme.colors.background };
+        background:  ${props => props.theme.colors.secondaryBackground };
+        border-color: ${props => props.theme.colors.secondaryBorder };
+        box-shadow: 0 5px 15px ${props => props.theme.colors.secondaryBorder}40;
 
         
         span{
@@ -285,79 +307,16 @@ export const Selector = styled.div`
 
     &.selected{
 
-        color: #ffffff;
-        background: #8acdda;
-        border-color: #59b8cb;
+        color: ${props => props.theme.colors.background };
+        background: ${props => props.theme.colors.primaryStrongher };
+        border-color: ${props => props.theme.colors.primary };
 
         &:hover{
-            color: #ffffff;
-            background: #a4a6c7;
-            border-color: #6a70c9;
-            box-shadow: 0 5px 15px #6a70c940;
+            color: ${props => props.theme.colors.background };
+            background: ${props => props.theme.colors.secondaryBackground };
+            border-color: ${props => props.theme.colors.secondaryBorder };
+            box-shadow: 0 5px 15px ${props => props.theme.colors.secondaryBorder }40;
         }
-    }
-
-`
-export const Tooltip = styled.span`
-        visibility: hidden;
-        color: #ffffff;
-        background: #6a70c9;
-        border: 1px solid  #6a70c9;
-        text-align: center;
-        border-radius: 8px;
-        padding: 5px 0;
-
-        font-size: 12px;
-        position: absolute;
-        z-index: 10;
-        bottom: 120%;
-        left: 50%;
-        margin-left: -60px;
-
-        width: 120px;
-        
-        &::after {
-            content: " ";
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            margin-left: -5px;
-            border-width: 5px;
-            border-style: solid;
-            border-color: #6a70c9 transparent transparent transparent;
-        }
-`
-
-export const ConfirmBox = styled.div`
-
-    position: absolute;
-    /* left: 50%;
-    top: 50%; */
-    /* height: 120px;
-    width: 200px; */
-    z-index: 40;
-
-    height: 100%;
-    width: 100%;
-
-    /* margin-left: -100px;
-    margin-top: -60px; */
-
-    border-radius: 8px;
-
-    justify-self: center;
-
-    background-color: #00000040;
-
-    &::before{
-        z-index: 55;
-        content: ' ';
-        position: absolute;
-        height: 100%;
-        width: 100%;
-        background-color: #00000040;
-        backdrop-filter: blur(2px);
-        top: 0%;
     }
 
 `

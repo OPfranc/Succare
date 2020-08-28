@@ -5,11 +5,15 @@ exports.up = function(knex) {
         table.string('name').primary()
         table.json('alias').nullable()
         table.string('imgsrc').nullable()
-        table.string('light').notNullable()
+
         table.string('propagation').notNullable()
         table.string('activity').notNullable()
-        table.string('water').notNullable()
-        table.string('info')
+
+        table.date('lastWatering').notNullable()
+
+        table.integer('waterNeed').notNullable()
+        table.integer('sunNeed').notNullable()
+        table.integer('shadowNeed').notNullable()
         
     })
   };

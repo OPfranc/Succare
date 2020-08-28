@@ -3,6 +3,10 @@ import { useForm } from 'react-hook-form'
 
 import ConfirmBox from '../ConfirmBox'
 
+import Tooltip from '../../utils/Tooltip'
+
+import api from '../../services/api'
+
 import {
     Container,
     HiddenInput,
@@ -11,11 +15,11 @@ import {
     WaterContainer,
     SendButton,
     TextInputContainer,
-    Tooltip,
     Wrapper,
-    Close } from './styles'
+    Close
+} from './styles'
 
-import { 
+import {
     DormantIcon,
     ActiveIcon,
     WinterIcon,
@@ -23,35 +27,35 @@ import {
     FallIcon,
     SpringIcon,
     SunIcon,
-    ShadowIcon,    
-    WaterDrop, } from '../../styles/icons'
+    ShadowIcon,
+    WaterDrop,
+} from '../../styles/icons'
 
-import { seasonsEnum, 
-    propagationEnum, 
-    activityEnum, 
+import {
+    seasonsEnum,
+    propagationEnum,
+    activityEnum,
     waterNeedsEnum,
     lightNeedsSunEnum,
-    lightNeedsShadowEnum} from '../../utils/Enums'
+    lightNeedsShadowEnum
+} from '../../utils/Enums'
 
 
-export default function PlantForm({ close }) {
+export default function PlantForm({ close, watcher }) {
 
-    const [sunNeed, setSunNeed] = useState(2)
-    const [waterNeed, setWaterNeed] = useState(1)
-    const [propagation, setPropagation] = useState([false, false, false, true])
-    const [activity, setActivity] = useState([0, 0, 1, 2])
-    const [shadowNeed, setShadowNeed] = useState(2)
+    const [waterNeed, setWaterNeed] = useState(0)
+    const [propagation, setPropagation] = useState([false, false, false, false])
+    const [activity, setActivity] = useState([0, 0, 0, 0])
+    const [sunNeed, setSunNeed] = useState(0)
+    const [shadowNeed, setShadowNeed] = useState(0)
+    const [data, setData] = useState({})
 
     const [sendConfirmation, setSendConfirmation] = useState(false)
-
     const [showConfirmBox, setShowConfirmBox] = useState(false)
 
     const { register, handleSubmit, errors } = useForm()
 
     useEffect(() => {
-
-        // if(sendConfirmation)
-        //     Send()
 
         sendConfirmation && Send()
 
@@ -60,8 +64,40 @@ export default function PlantForm({ close }) {
 
     }, [sendConfirmation])
 
-    function Send(){
-        console.log('SENDING');
+    async function Send() {
+        const { name, alias, activity, imgsrc, propagation, shadowNeed: shadow, sunNeed: sun, waterNeed: water } = data
+
+        const shadowNeed = Number(shadow)
+        const sunNeed = Number(sun)
+        const waterNeed = Number(water)
+
+        const lastWatering = new Date()
+
+        const plant = {
+
+            name,
+            alias,
+            imgsrc,
+
+            propagation,
+            activity,
+
+            lastWatering,
+
+            shadowNeed,
+            sunNeed,
+            waterNeed
+        }
+
+        console.log(plant, 'SENDING');
+
+        const response = await api.post('/', plant);
+
+        console.log(response.status);
+
+        watcher(response.data.message);
+
+
         close(false)
     }
 
@@ -98,15 +134,16 @@ export default function PlantForm({ close }) {
 
     function onSubmit(data) {
 
-    
+
         setShowConfirmBox(true)
+        setData(data)
         console.log(data, 'data');
     }
 
     return (
         <Wrapper classname={'wrapper'} >
             <Container classname={'container'}>
-                <Close onClick={() => {close(false)}}>X</Close>
+                <Close onClick={() => { close(false) }}>X</Close>
                 <form onSubmit={handleSubmit(onSubmit)}>
 
                     <TextInputContainer>
@@ -114,7 +151,7 @@ export default function PlantForm({ close }) {
 
                         <input
                             type={'text'}
-                            name={'plantName'}
+                            name={'name'}
                             placeholder={'scientific name'}
                             ref={register({
                                 required: 'Insert Plants name'
@@ -127,11 +164,22 @@ export default function PlantForm({ close }) {
                         <span>Alias</span>
                         <input
                             type={'text'}
-                            name={'plantAlias'}
+                            name={'alias'}
                             placeholder={'common name'}
                             ref={register()}
                         />
                     </TextInputContainer>
+
+                    <TextInputContainer>
+                        <span>Image src</span>
+                        <input
+                            type={'html'}
+                            name={'imgsrc'}
+                            placeholder={'link to plant image'}
+                            ref={register()}
+                        />
+                    </TextInputContainer>
+
                     <h2>Light</h2>
                     <ButtomContainer>
 
@@ -141,7 +189,7 @@ export default function PlantForm({ close }) {
                         </Selector>
 
                         <Selector onClick={sunNeedsButtonHandler} >
-                            <SunIcon className={`color-variant${sunNeed}`}/>
+                            <SunIcon className={`color-variant${sunNeed}`} />
                             <Tooltip>{lightNeedsSunEnum[sunNeed]}</Tooltip>
                         </Selector>
 
@@ -202,10 +250,10 @@ export default function PlantForm({ close }) {
 
                     <WaterContainer onClick={waterButtonHandler}>
 
-                        {[0,1,2].map((index) => (
-                            <WaterDrop key={index} className={index <= waterNeed ? 'fill' : ''}/>
+                        {[0, 1, 2].map((index) => (
+                            <WaterDrop key={index} className={index <= waterNeed ? 'fill' : ''} />
                         ))}
-                        
+
                         <Tooltip>{waterNeedsEnum[waterNeed]}</Tooltip>
 
                     </WaterContainer>
@@ -214,12 +262,14 @@ export default function PlantForm({ close }) {
 
                     <HiddenInput
 
+                        type={'number'}
                         name={'sunNeed'}
                         value={sunNeed}
                         ref={register()}
                     />
                     <HiddenInput
 
+                        type={'number'}
                         name={'shadowNeed'}
                         value={shadowNeed}
                         ref={register()}
@@ -238,6 +288,7 @@ export default function PlantForm({ close }) {
                     />
                     <HiddenInput
 
+                        type={'number'}
                         name={'waterNeed'}
                         value={waterNeed}
                         ref={register()}
@@ -247,7 +298,7 @@ export default function PlantForm({ close }) {
 
             </Container>
 
-            {showConfirmBox && <ConfirmBox title={'Insert Plant'} sendConfirmation={setSendConfirmation} showConfirmBox={setShowConfirmBox}/>}
+            {showConfirmBox && <ConfirmBox title={'Insert Plant'} sendConfirmation={setSendConfirmation} showConfirmBox={setShowConfirmBox} />}
         </Wrapper>
     )
 

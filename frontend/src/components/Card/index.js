@@ -33,7 +33,6 @@ import {
 
 import Tooltip from '../../utils/Tooltip'
 
-
 export default function Card({ plant }) {
 
     const [day, month, dayNumber, year] = plant.lastWatering.toDateString().split(" ")
@@ -70,13 +69,15 @@ export default function Card({ plant }) {
 
                     if (daysSinceWatering >= 12)
                         return 2
-
+                    break
                 case 2:
                     if (daysSinceWatering >= 4 && daysSinceWatering < 8)
                         return 1
 
                     if (daysSinceWatering >= 8)
                         return 2
+                    break
+
                 default:
                     if (daysSinceWatering >= 9 && daysSinceWatering < 15)
                         return 1
@@ -89,8 +90,8 @@ export default function Card({ plant }) {
         <>
             <Container>
                 <InfoContainer>
-                    <h1>{plant.plantName}</h1>
-                    <h2>{plant.plantAlias}</h2>
+                    <h1>{plant.name}</h1>
+                    <h2>{plant.alias}</h2>
 
                     <Info>
                         <Label>Light</Label>
@@ -151,11 +152,11 @@ export default function Card({ plant }) {
                         <h4 >Last Watering</h4>
                         <h2>{dateData.month}/{dateData.dayNumber}</h2>
 
-
+                        <button onClick={wateringHandler}>aaa</button>
                     </Info>
                 </InfoContainer>
 
-                <Image src={'http://www.jardineiro.net/wp-content/uploads/2017/11/Orostachys_boehmeri.jpg'} alt={'Plant'} />
+                <Image src={plant.imgsrc} alt={'Plant'} />
 
                 <WateringWarn className={wateringLevelEnum[waterWarningLevel]}>
                     <WaterWarningIcon />

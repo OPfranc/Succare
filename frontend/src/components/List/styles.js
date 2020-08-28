@@ -25,7 +25,7 @@ export const Container = styled.div`
         border-radius: 8px;
         border: 1px solid #ffffff;
         align-items: center;
-        background-color: #EBE9ED;
+        background-color: #f7fcfc;
         margin: 3px 15px;
         padding: 2px;
         display: flex;

@@ -14,9 +14,9 @@ export default function Tooltip({ children }){
 
 const Text = styled.span`
         visibility: hidden;
-        color: #ffffff;
-        background: #6a70c9;
-        border: 1px solid  #6a70c9;
+        color:${props => props.theme.colors.background };
+        background: ${props => props.theme.colors.secondaryBorder };
+        border: 1px solid  ${props => props.theme.colors.secondaryBorder };
         text-align: center;
         border-radius: 8px;
         padding: 5px 0;
@@ -39,6 +39,6 @@ const Text = styled.span`
             margin-left: -5px;
             border-width: 5px;
             border-style: solid;
-            border-color: #6a70c9 transparent transparent transparent;
+            border-color: ${props => props.theme.colors.secondaryBorder } transparent transparent transparent;
         }
 `

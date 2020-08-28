@@ -7,8 +7,8 @@ export const Container = styled.div`
     height: 55px;
     display: flex;
     align-items: center;
-    background-color: ${props => props.theme.colors.background };
-    color: ${props => props.theme.colors.primary };
+    background-color: ${props => props.theme.colors.textPrimaryBackground };
+    color: ${props => props.theme.colors.text };
     justify-content: space-between;
     
     border-bottom: 1px solid grey;
