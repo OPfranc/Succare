@@ -46,8 +46,6 @@ export const Container = styled.div`
     z-index: 60;
 
     h1{
-        padding-top: 10px;
-
         color: #b2c2df;
 
     }

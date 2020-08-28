@@ -1,24 +1,40 @@
 import React, { useState } from 'react'
 
 import {
+    seasonsEnum,
+    activityEnum,
+    propEnum,
+    lightNeedsShadowEnum,
+    lightNeedsSunEnum,
+    wateringLevelEnum
+} from '../../utils/Enums'
+
+import {
     Container,
-    Info,
-    CardHeader,
-    HiddenInfo,
-    Description,
-    Watering,
-    Buttom,
     InfoContainer,
-    Selector
+    Info,
+    Icon,
+    IconContainer,
+    WateringWarn,
+    WateringWarnSpin,
+    Image,
+    Label
 } from './styles'
 
-import { ShadowIcon, SunIcon } from '../../styles/icons'
+import {
+    ShadowIcon, SunIcon, DormantIcon,
+    ActiveIcon,
+    WinterIcon,
+    SummerIcon,
+    FallIcon,
+    SpringIcon,
+    WaterWarningIcon,
+} from '../../styles/icons'
 
-import { propEnum } from '../../utils/Enums'
+import Tooltip from '../../utils/Tooltip'
 
 
-export default function NewCard({ plant }) {
-
+export default function Card({ plant }) {
 
     const [day, month, dayNumber, year] = plant.lastWatering.toDateString().split(" ")
     const [dateData, setDateData] = useState({
@@ -27,21 +43,7 @@ export default function NewCard({ plant }) {
         dayNumber,
         year
     })
-
-    const lightNeedsSun = [
-        'no sun',
-        'partial sun',
-        'full sun'
-    ]
-    const lightNeedsShadow = [
-        'no shadow',
-        'partial shadow',
-        'shadow'
-    ]
-
-
-    let today = new Date()
-
+    const today = new Date()
 
     function wateringHandler() {
         plant.lastWatering = today;
@@ -56,89 +58,111 @@ export default function NewCard({ plant }) {
 
     }
 
-
-
     const daysSinceWatering = daysCount(plant.lastWatering)
 
-    
-    let waterNeedColor = '#44ff00'
+    const waterWarningLevel = calculateWaterWarning()
 
-    if (daysSinceWatering > 3)
-        waterNeedColor = '#fff600'
-    if (daysSinceWatering > 7)
-        waterNeedColor = '#ff9300'
-    if (daysSinceWatering > 14)
-        waterNeedColor = '#ff0000'
+        function calculateWaterWarning() {
+            switch (plant.waterNeed) {
+                case 1:
+                    if (daysSinceWatering >= 6 && daysSinceWatering < 12)
+                        return 1
 
+                    if (daysSinceWatering >= 12)
+                        return 2
+
+                case 2:
+                    if (daysSinceWatering >= 4 && daysSinceWatering < 8)
+                        return 1
+
+                    if (daysSinceWatering >= 8)
+                        return 2
+                default:
+                    if (daysSinceWatering >= 9 && daysSinceWatering < 15)
+                        return 1
+                    if (daysSinceWatering >= 15)
+                        return 2
+            }
+        }
 
     return (
-
         <>
             <Container>
-                <Info>
+                <InfoContainer>
+                    <h1>{plant.plantName}</h1>
+                    <h2>{plant.plantAlias}</h2>
 
-                    <CardHeader>
+                    <Info>
+                        <Label>Light</Label>
+                        <IconContainer>
 
-                        <h1>{plant.plantName}</h1>
-                        <h2>{plant.plantAlias}</h2>
-                    </CardHeader>
-                    <HiddenInfo>
+                            <Icon>
+                                <ShadowIcon className={`color-variant${plant.shadowNeed}`} />
+                                <Tooltip>{lightNeedsShadowEnum[plant.shadowNeed]}</Tooltip>
+                            </Icon>
 
-                        {/* <InfoContainer>
-                            <span>Light</span>
-                            <div>
-                                <Selector>
-
-                                    <ShadowIcon className={`color-variant${plant.shadowNeed}`} />
-                                    <Tooltip>{lightNeedsShadow[plant.shadowNeed]}</Tooltip>
-                                </Selector>
-                                <Selector>
-
-                                    <SunIcon className={`color-variant${plant.sunNeed}`} />
-                                    <Tooltip>{lightNeedsSun[plant.sunNeed]}</Tooltip>
-                                </Selector>
-                            </div>
-                        </InfoContainer> */}
-{/* 
-                        <InfoContainer>
-                            <span>Propagation by</span>
-                            <div>
-                                {plant.propagation.map((propagationMethod, index) => (
-                                    propagationMethod && <h4 key={index}>{propEnum[index]}</h4>
-                                ))}
-                            </div>
-                        </InfoContainer> */}
-
-                        <InfoContainer>
-                            <span>Activity</span>
-                            <div>
-                                {plant.activity.map((seasonActivity, index) => (
-                                    !!seasonActivity && <Selector key={index} ></Selector>
-                                ))}
-                            </div>
-                        </InfoContainer>
+                            <Icon>
+                                <SunIcon className={`color-variant${plant.sunNeed}`} />
+                                <Tooltip>{lightNeedsSunEnum[plant.sunNeed]}</Tooltip>
+                            </Icon>
 
 
+                        </IconContainer>
+                    </Info>
 
-                        <div>
-                            <strong>Activity:</strong>
-                            <span>{plant.activity}</span>
-                        </div>
-                        <p>Last watering: {dateData.month}/{dateData.dayNumber}</p>
-                        <Buttom onClick={wateringHandler} />
-                    </HiddenInfo>
-                </Info>
+                    <Info>
+                        <Label>Propagation</Label>
+                        <IconContainer>
 
-                <Description>
+                            {plant.propagation.map((propagationMethod, index) => (
+                                propagationMethod && <Icon key={index}>{propEnum[index]}</Icon>
+                            ))}
+                        </IconContainer>
+                    </Info>
 
-                    <img src={'http://www.jardineiro.net/wp-content/uploads/2017/11/Orostachys_boehmeri.jpg'} alt={'Plant'} />
+                    <Info>
+                        <Label>Activity</Label>
+                        <IconContainer>
 
-                    <Watering color={waterNeedColor} />
-                </Description>
+                            {plant.activity.map((seasonActivity, index) => (
+                                !!seasonActivity && <Icon key={index}>{
+                                    {
+                                        0: <SummerIcon />,
+                                        1: <FallIcon />,
+                                        2: <WinterIcon />,
+                                        3: <SpringIcon />
+                                    }[index]
+                                }
+                                    {{
+                                        0: null,
+                                        1: <ActiveIcon />,
+                                        2: <DormantIcon />,
+                                    }[seasonActivity]}
+
+                                    {
+                                        !!seasonActivity &&
+                                        <Tooltip >{seasonsEnum[index]} {activityEnum[seasonActivity]}</Tooltip>
+                                    }</Icon>
+                            ))}
+                        </IconContainer>
+                    </Info>
+
+                    <Info >
+                        <h4 >Last Watering</h4>
+                        <h2>{dateData.month}/{dateData.dayNumber}</h2>
+
+
+                    </Info>
+                </InfoContainer>
+
+                <Image src={'http://www.jardineiro.net/wp-content/uploads/2017/11/Orostachys_boehmeri.jpg'} alt={'Plant'} />
+
+                <WateringWarn className={wateringLevelEnum[waterWarningLevel]}>
+                    <WaterWarningIcon />
+                    <WateringWarnSpin className={wateringLevelEnum[waterWarningLevel]}/>
+                </WateringWarn>
+
             </Container>
         </>
     )
 }
-
-
-

@@ -2,14 +2,13 @@ import React from 'react'
 
 
 import Card from '../Card'
-import PlantCard from '../PlantCard'
 import { Container } from './styles'
 
 
 
 export default function List(props) {
 
-    var date2 = new Date(2020, 7, 13);
+    var date2 = new Date(2020, 5, 13);
 
     const newPlant = {
 
@@ -63,7 +62,6 @@ export default function List(props) {
             <Container>
                 {plants.map((plant, index) => (
                     <div key={index}>
-                    <PlantCard plant={plant} key={index}/>
                     <Card plant={plant} />
                     </div>
                 ))}

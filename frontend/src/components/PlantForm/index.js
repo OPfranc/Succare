@@ -12,7 +12,8 @@ import {
     SendButton,
     TextInputContainer,
     Tooltip,
-    Wrapper, } from './styles'
+    Wrapper,
+    Close } from './styles'
 
 import { 
     DormantIcon,
@@ -25,10 +26,15 @@ import {
     ShadowIcon,    
     WaterDrop, } from '../../styles/icons'
 
-import { seasonsEnum, propagationEnum, activityEnum, waterNeedsEnum } from '../../utils/Enums'
+import { seasonsEnum, 
+    propagationEnum, 
+    activityEnum, 
+    waterNeedsEnum,
+    lightNeedsSunEnum,
+    lightNeedsShadowEnum} from '../../utils/Enums'
 
 
-export default function PlantForm() {
+export default function PlantForm({ close }) {
 
     const [sunNeed, setSunNeed] = useState(2)
     const [waterNeed, setWaterNeed] = useState(1)
@@ -44,30 +50,26 @@ export default function PlantForm() {
 
     useEffect(() => {
 
-        console.log('SENDING');
+        // if(sendConfirmation)
+        //     Send()
+
+        sendConfirmation && Send()
 
         setShowConfirmBox(false)
         setSendConfirmation(false)
 
     }, [sendConfirmation])
 
-    const lightNeedsSun = [
-        'no sun',
-        'partial sun',
-        'full sun'
-    ]
-
-    const lightNeedsShadow = [
-        'no shadow',
-        'partial shadow',
-        'shadow'
-    ]
+    function Send(){
+        console.log('SENDING');
+        close(false)
+    }
 
     function sunNeedsButtonHandler() {
-        setSunNeed(prevState => ((prevState + 1) % lightNeedsSun.length))
+        setSunNeed(prevState => ((prevState + 1) % lightNeedsSunEnum.length))
     }
     function shadowNeedsButtonHandler() {
-        setShadowNeed(prevState => ((prevState + 1) % lightNeedsShadow.length))
+        setShadowNeed(prevState => ((prevState + 1) % lightNeedsShadowEnum.length))
     }
 
     function waterButtonHandler() {
@@ -102,12 +104,13 @@ export default function PlantForm() {
     }
 
     return (
-        <Wrapper>
-            <Container>
-
+        <Wrapper classname={'wrapper'} >
+            <Container classname={'container'}>
+                <Close onClick={() => {close(false)}}>X</Close>
                 <form onSubmit={handleSubmit(onSubmit)}>
+
                     <TextInputContainer>
-                        <   >Plant name</>
+                        <span>Plant name</span>
 
                         <input
                             type={'text'}
@@ -134,12 +137,12 @@ export default function PlantForm() {
 
                         <Selector onClick={shadowNeedsButtonHandler} >
                             <ShadowIcon className={`color-variant${shadowNeed}`} />
-                            <Tooltip>{lightNeedsShadow[shadowNeed]}</Tooltip>
+                            <Tooltip>{lightNeedsShadowEnum[shadowNeed]}</Tooltip>
                         </Selector>
 
                         <Selector onClick={sunNeedsButtonHandler} >
                             <SunIcon className={`color-variant${sunNeed}`}/>
-                            <Tooltip>{lightNeedsSun[sunNeed]}</Tooltip>
+                            <Tooltip>{lightNeedsSunEnum[sunNeed]}</Tooltip>
                         </Selector>
 
                     </ButtomContainer>

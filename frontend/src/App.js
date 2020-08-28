@@ -1,4 +1,4 @@
-import React, { } from 'react';
+import React, { useState} from 'react';
 import { ThemeProvider } from 'styled-components'
 
 import GlobalStyles from './styles/GlobalStyles'
@@ -9,6 +9,7 @@ import dark from './styles/themes/dark'
 import usePersistedState from './utils/usePersistedState'
 
 import PlantForm from './components/PlantForm'
+import NewButton from './components/NewButton'
 import Header from './components/Header'
 import List from './components/List'
 
@@ -16,6 +17,8 @@ import List from './components/List'
 function App() {
 
   // const [plants, setPlants] = useState([])
+
+  const [showNewForm, setShowNewForm] = useState(false)
 
   const [theme, setTheme] = usePersistedState('theme', dark)
 
@@ -41,8 +44,9 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <Header switchTheme={switchTheme}/>
-        {/* <PlantForm/> */}
+        { showNewForm && <PlantForm close={setShowNewForm}/> }
          <List plantList={()=>{}}/>
+         <NewButton onClick={() => {setShowNewForm(true)}}/>
       <GlobalStyles />
       </ThemeProvider>
     </>

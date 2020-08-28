@@ -39,3 +39,9 @@ export const lightNeedsShadowEnum = [
     'partial shadow',
     'shadow'
 ]
+
+export const wateringLevelEnum = [
+    'fine',
+    'caution',
+    'danger'
+]

@@ -6,7 +6,7 @@ export const Container = styled.div`
     
     position: relative;
     width: 100%;
-    height: 100%;
+    height: calc(100vh - 55px);
     padding: 5px;
     background-color: ${props => props.theme.colors.background};
     display: flex;
@@ -38,7 +38,6 @@ export const Container = styled.div`
         }
     }
     @media (max-width: 768px) {
-        width: 450px;
   }
 
 `

@@ -28,6 +28,7 @@ const Text = styled.span`
         left: 50%;
         margin-left: -60px;
 
+
         width: 120px;
         
         &::after {

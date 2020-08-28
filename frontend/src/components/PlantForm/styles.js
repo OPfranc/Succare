@@ -2,6 +2,8 @@ import styled from 'styled-components'
 
 
 export const Wrapper = styled.div`
+
+    
     
     position: absolute;
 
@@ -11,7 +13,37 @@ export const Wrapper = styled.div`
     height: 100%;
     
     z-index: 20;
+    backdrop-filter: blur(3px);
+`
+export const Close = styled.div`
 
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+
+    top: 16px;
+    right: 7px;
+
+    height: 24px;
+    width: 24px;
+
+    border-radius: 8px; 
+
+
+    color: #ffffff;
+    border: 1px solid #cdd9ed;
+    
+    background-color: #59b8cb;
+
+    cursor: pointer;
+
+    &:hover{
+    border: 1px solid #6a70c9;
+    background-color: #a4a6c7;
+
+    }
 `
 
 export const Container = styled.div`
@@ -27,6 +59,7 @@ export const Container = styled.div`
 
     box-sizing: border-box;
 
+    position: relative;
 
     box-shadow: 0 1px 2px rgba(0,0,0,0.07), 
                 0 2px 4px rgba(0,0,0,0.07), 
@@ -36,7 +69,6 @@ export const Container = styled.div`
                 0 32px 64px rgba(0,0,0,0.07);
 
     overflow: hidden;
-    position: relative;
 
     margin: 18px auto;
     border-radius: 8px;
