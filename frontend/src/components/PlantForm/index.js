@@ -6,6 +6,9 @@ import ConfirmBox from '../ConfirmBox'
 import Tooltip from '../../utils/Tooltip'
 
 import api from '../../services/api'
+import { firestore } from '../../services/firebase'
+
+
 
 import {
     Container,
@@ -43,7 +46,7 @@ import {
 
 export default function PlantForm({ close, watcher }) {
 
-    const [waterNeed, setWaterNeed] = useState(0)
+    const [waterNeed, setWaterNeed] = useState(1)
     const [propagation, setPropagation] = useState([false, false, false, false])
     const [activity, setActivity] = useState([0, 0, 0, 0])
     const [sunNeed, setSunNeed] = useState(0)
@@ -91,11 +94,13 @@ export default function PlantForm({ close, watcher }) {
 
         console.log(plant, 'SENDING');
 
-        const response = await api.post('/', plant);
+        // const response = await api.post('/', plant); //SQLITE3
+        const response = await firestore.collection('plants').add(plant) //SQLITE3
+
 
         console.log(response.status);
 
-        watcher(response.data.message);
+        // watcher(response.data.message);
 
 
         close(false)
@@ -205,7 +210,7 @@ export default function PlantForm({ close, watcher }) {
                                 className={method ? 'selected' : ''}
                                 onClick={() => { selectorHandler({ index }) }}
                             >
-                                {Object.keys(propagationEnum)[index]}
+                                {propagationEnum[index]}
                             </Selector>
                         ))}
 

@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import {
     seasonsEnum,
     activityEnum,
-    propEnum,
+    propagationEnum,
     lightNeedsShadowEnum,
     lightNeedsSunEnum,
     wateringLevelEnum
@@ -116,7 +116,7 @@ export default function Card({ plant }) {
                         <IconContainer>
 
                             {plant.propagation.map((propagationMethod, index) => (
-                                propagationMethod && <Icon key={index}>{propEnum[index]}</Icon>
+                                propagationMethod && <Icon key={index}>{propagationEnum[index]}</Icon>
                             ))}
                         </IconContainer>
                     </Info>

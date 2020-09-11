@@ -12,8 +12,8 @@ export default function List({ plants }) {
     function plantify(plant){
 
         const lastWatering = new Date(plant.lastWatering)
-        const activity = plant.activity.split(",").map(value => Number(value))
-        const propagation = plant.propagation.split(',').map(value => value === 'true' ? true : false)
+        const activity = plant.activity?.split(",").map(value => Number(value))
+        const propagation = plant.propagation?.split(',').map(value => value === 'true' ? true : false)
         const { name, alias, imgsrc, shadowNeed, sunNeed, waterNeed } = plant
         
         const newPlant = {
