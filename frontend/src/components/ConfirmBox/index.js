@@ -12,7 +12,7 @@ export default function ConfirmBox({ title, sendConfirmation, showConfirmBox }) 
 
                 <ButtonsContainer>
 
-                    <Button onClick={() => sendConfirmation(true)}>OK</Button>
+                    <Button onClick={() => sendConfirmation()}>OK</Button>
                     <Button onClick={() => showConfirmBox(false)} className={'reject-button'}>CANCEL</Button>
                 </ButtonsContainer>
             </Container>

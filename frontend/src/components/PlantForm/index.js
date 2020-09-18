@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import ConfirmBox from '../ConfirmBox'
 
 import Tooltip from '../../utils/Tooltip'
 
-import api from '../../services/api'
 import { firestore } from '../../services/firebase'
 
 
@@ -44,7 +43,7 @@ import {
 } from '../../utils/Enums'
 
 
-export default function PlantForm({ close, watcher }) {
+export default function PlantForm({ close : closeWindow }) {
 
     const [waterNeed, setWaterNeed] = useState(1)
     const [propagation, setPropagation] = useState([false, false, false, false])
@@ -53,19 +52,17 @@ export default function PlantForm({ close, watcher }) {
     const [shadowNeed, setShadowNeed] = useState(0)
     const [data, setData] = useState({})
 
-    const [sendConfirmation, setSendConfirmation] = useState(false)
     const [showConfirmBox, setShowConfirmBox] = useState(false)
 
     const { register, handleSubmit, errors } = useForm()
 
-    useEffect(() => {
 
-        sendConfirmation && Send()
+
+    async function SendConfirmation(){
+        await Send()
 
         setShowConfirmBox(false)
-        setSendConfirmation(false)
-
-    }, [sendConfirmation])
+    }
 
     async function Send() {
         const { name, alias, activity, imgsrc, propagation, shadowNeed: shadow, sunNeed: sun, waterNeed: water } = data
@@ -92,18 +89,11 @@ export default function PlantForm({ close, watcher }) {
             waterNeed
         }
 
-        console.log(plant, 'SENDING');
-
-        // const response = await api.post('/', plant); //SQLITE3
-        const response = await firestore.collection('plants').add(plant) //SQLITE3
-
-
-        console.log(response.status);
-
-        // watcher(response.data.message);
-
-
-        close(false)
+        const plantRef = await firestore.collection('plants').add(plant) //SQLITE3
+        
+        closeWindow(false)
+        console.log(plantRef);
+        console.log(plantRef.data);
     }
 
     function sunNeedsButtonHandler() {
@@ -148,7 +138,7 @@ export default function PlantForm({ close, watcher }) {
     return (
         <Wrapper classname={'wrapper'} >
             <Container classname={'container'}>
-                <Close onClick={() => { close(false) }}>X</Close>
+                <Close onClick={() => { closeWindow(false) }}>X</Close>
                 <form onSubmit={handleSubmit(onSubmit)}>
 
                     <TextInputContainer>
@@ -303,7 +293,7 @@ export default function PlantForm({ close, watcher }) {
 
             </Container>
 
-            {showConfirmBox && <ConfirmBox title={'Insert Plant'} sendConfirmation={setSendConfirmation} showConfirmBox={setShowConfirmBox} />}
+            {showConfirmBox && <ConfirmBox title={'Insert Plant'} sendConfirmation={SendConfirmation} showConfirmBox={setShowConfirmBox} />}
         </Wrapper>
     )
 

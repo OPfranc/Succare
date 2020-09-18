@@ -5,9 +5,9 @@ import GlobalStyles from './styles/GlobalStyles'
 import light from './styles/themes/light'
 import dark from './styles/themes/dark'
 
-import api from './services/api'
 import { firestore } from './services/firebase'
 import usePersistedState from './utils/usePersistedState'
+import { plantDocToData } from './utils/docToData'
 
 import PlantForm from './components/PlantForm'
 import NewButton from './components/NewButton'
@@ -17,42 +17,39 @@ import List from './components/List'
 
 function App() {
 
-	const [watcher, setWatcher] = useState('')
-
 	const [plants, setPlants] = useState([])
-
-	// ################
-
 	const [plants2, setPlants2] = useState([])
-
-	useEffect(() => {
-
-		firestore.collection('plants').onSnapshot(snapshot => (
-			setPlants2((snapshot.docs.map( doc => ({
-				id : doc.id,
-				name : doc.data().name,
-				alias : doc.data().alias,
-				activity : doc.data().activity || '',
-				imgsrc : doc.data().imgsrc || 'https://via.placeholder.com/150/FF0000/808080/?text=Down.com',
-				propagation : doc.data().propagation || 'n',
-				lastWatering : doc.data().lastWatering,
-				shadowNeed : doc.data().shadowNeed || 2,
-				sunNeed : doc.data().sunNeed || 2,
-				waterNeed : doc.data().waterNeed || 2,
-
-			}))))
-		))
-	}, [])
-
-	useEffect(() => {
-		console.log(plants2);
-	}, [plants2])
-
-	// ###############
 
 	const [showNewForm, setShowNewForm] = useState(false)
 
 	const [theme, setTheme] = usePersistedState('theme', dark)
+	const [ user ] = usePersistedState('user', null)
+
+	useEffect(() => {
+
+		firestore.collection('plants').onSnapshot(snapshot => (
+			setPlants((snapshot.docs.map(doc => (plantDocToData(doc)))))
+		))
+	}, [])
+
+	console.log({user});
+
+	useEffect(() => {
+
+		console.log('aaaa');
+		setPlants2([])
+
+		if (user)
+			firestore.collection(`user/${user.uid}/plants`).onSnapshot(snapshot => (
+				((snapshot.docs.map(doc => (
+					firestore.collection('plants').doc(doc.id).get().then(a => {
+						setPlants2(prevState => [...prevState, plantDocToData(a)])
+					}))
+				)))
+			))
+
+	}, [user])
+
 
 	function switchTheme() {
 
@@ -60,25 +57,16 @@ function App() {
 	}
 
 
-	useEffect(() => {
-
-		(async () => {
-			const response = await api.get(`/`)
-			const { data } = response
-
-			setPlants(data)
-		})()
-
-	}, [watcher])
-
-
 	return (
 		<>
 			<ThemeProvider theme={theme}>
+
 				<Header switchTheme={switchTheme} />
-				{showNewForm && <PlantForm close={setShowNewForm} watcher={setWatcher} />}
-				{/* <List plants={plants} /> */}
+				{showNewForm && <PlantForm close={setShowNewForm} />}
+				<h2>Collection</h2>
 				<List plants={plants2} />
+				<h2>Collection2</h2>
+				<List plants={plants} />
 				<NewButton onClick={() => { setShowNewForm(true) }} />
 				<GlobalStyles />
 			</ThemeProvider>
