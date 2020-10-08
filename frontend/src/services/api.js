@@ -5,3 +5,7 @@ const api = axios.create({
 });
 
 export default api;
+
+// export const imgurUploader = axios.create({
+//   baseURL: 'https://api.imgur.com/3/'
+// })

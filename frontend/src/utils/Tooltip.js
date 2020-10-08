@@ -23,7 +23,7 @@ const Text = styled.span`
 
         font-size: 12px;
         position: absolute;
-        z-index: 10;
+        z-index: 90;
         bottom: 120%;
         left: 50%;
         margin-left: -60px;

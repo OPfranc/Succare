@@ -1,42 +1,35 @@
 import React from 'react'
-import { useStateValue } from '../../utils/StateProvider'
-
-
 import { auth, authProvider } from '../../services/firebase'
-import { actionTypes } from '../../utils/reducer'
-import usePersistedState from '../../utils/usePersistedState'
-
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 
 export default function Login() {
 
-    const [log, setLog] = usePersistedState('user', null)
+    const [user2, loading, error] = useAuthState(auth);
 
-    const signIn = () => {
-        auth.signInWithPopup(authProvider)
-            .then(result => {
-                setLog(result.user)
-            }
-            )
-            .catch(error => {
-                alert(error.message)
-            })
+
+    function signIn() {
+        auth.signInWithPopup(authProvider).catch(error => {
+            alert(error.message)
+        })
     }
-    const signOut = () => {
-        auth.signOut()
-            .then(result => {
-                setLog(null)
-            }
-            )
-            .catch(error => {
-                alert(error.message)
-            })
+    function signOut() {
+        auth.signOut().catch(error => {
+            alert(error.message)
+        })
     }
+
+    const loginButton = (
+        <button onClick={signIn}>{user2?.displayName || 'Login'}</button>
+    )
+    const logoutButton = (
+        <button onClick={signOut}>{'logout'}</button>
+    )
 
     return (
         <>
-            <button onClick={signIn}>{log?.displayName || 'Login'}</button>
-            <button onClick={signOut}>{'logout'}</button>
+            <h2>{loading ? 'Carregando...' : user2?.displayName}</h2>
+            {user2 ? logoutButton : loginButton}
         </>
     )
 }
